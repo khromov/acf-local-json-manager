@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ACF Local JSON Manager
  * Description: Manages plugins that use ACF Local JSON
- * Version: 1.0
+ * Version: 1.1
  * Author: khromov
  */
 
@@ -138,7 +138,7 @@ class ACF_Local_JSON_Manager {
    * @return bool
    */
   function override_activated() {
-    return get_option('aljm_current_plugin') !== '_none';
+    return get_option('aljm_current_plugin') ? true : false;
   }
 
   /**
@@ -151,7 +151,9 @@ class ACF_Local_JSON_Manager {
       //Is the GET variable set?
       if(isset($_GET['aljm_select_plugin'])) {
 
-        update_option('aljm_current_plugin', $_GET['aljm_select_plugin']);
+        $new_option = ($_GET['aljm_select_plugin'] === '_none' ? '' : $_GET['aljm_select_plugin']);
+
+        update_option('aljm_current_plugin', $new_option);
 
         if(isset($_GET['aljm_return_url'])) {
           wp_redirect(urldecode($_GET['aljm_return_url']));
@@ -179,7 +181,7 @@ class ACF_Local_JSON_Manager {
     $plugins = apply_filters('aljm_save_json', array());
 
     //If override plugin is enabled, look for it in the registered plugins array and set it
-    if($override_plugin !== '_none' && isset($plugins[$override_plugin])) {
+    if($override_plugin && isset($plugins[$override_plugin])) {
       return $plugins[$override_plugin];
     }
 

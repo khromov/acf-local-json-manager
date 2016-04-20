@@ -51,3 +51,8 @@ add_filter('aljm_save_json', function($folders) {
   return $folders;
 });
 ```
+
+#### Changelog
+
+* 1.1 - Simplified activation mechanism. If you see "Local JSON: _none" in your admin bar please open the submenu and select Disable Overrides to reset it.
+* 1.0 - Initial release
