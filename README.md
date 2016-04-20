@@ -1,7 +1,7 @@
 # ACF Local JSON Manager
 **Manages plugins and themes that use ACF Local JSON.**
 
-![](https://dl.dropboxusercontent.com/u/2758854/aljm-screen.png)
+![](https://dl.dropboxusercontent.com/u/2758854/aljm-screen2.png)
 
 
 Are you working multiple plugins and themes that utilize [ACF Local JSON](https://www.advancedcustomfields.com/resources/local-json/)?
