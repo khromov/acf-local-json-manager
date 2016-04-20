@@ -1,11 +1,9 @@
 # ACF Local JSON Manager
-Manages plugins that use ACF Local JSON
-
-
+Manages plugins and themes that use ACF Local JSON.
 
 Are you working multiple plugins and themes that utilize [ACF Local JSON](https://www.advancedcustomfields.com/resources/local-json/)?
 
-Since Local JSON files can only save in one place, there is an issue if multiple plugins try to hook on `acf/settings/save_json`.
+Since Local JSON files can only save in one place, there is an issue if multiple plugins/themes try to hook on `acf/settings/save_json`.
 (Any field groups that you edit will be saved to the last plugin that hooks on the filter.) That's the problem ACF Local JSON Manager 
 tries to solve.
 
@@ -13,7 +11,7 @@ With ACF Local JSON Manager you can select which plugin or theme the Local JSON 
 
 #### Adding support for ACF Local JSON Manager
 
-You have to add a small filter in order to make your plugins compatible with the ACF Local JSON Manager. The snippet looks like this: 
+You have to add a filter in order to make your plugin/theme compatible with the ACF Local JSON Manager. The snippet looks like this: 
 
 ```php
 add_filter('aljm_save_json', function($folders) {
@@ -23,7 +21,7 @@ add_filter('aljm_save_json', function($folders) {
 ```
 
 The hook  `aljm_save_json` provides you with a key/value array `$folders` that lists all the folders currently registered in the manager. 
-The array key is your plugin name and the value is the path to the folder.
+The array key is your plugin or theme name and the value is the path to the folder.
 
 **Adding support to an existing plugin or theme**
 
