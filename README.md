@@ -1,14 +1,50 @@
 # ACF Local JSON Manager
 Manages plugins that use ACF Local JSON
 
-Working with a lot of different plugins that utilize Local JSON?
 
-Since Local JSON can only save in one place at once, you have the problem with fields group in different plugins.
 
-With ACF Local JSON Manager you can simply select which plugin or theme the Local JSON files should be saved in letting you 
-fiddle less with code and work more with your fields!
+Are you working multiple plugins and themes that utilize [ACF Local JSON](https://www.advancedcustomfields.com/resources/local-json/)?
+
+Since Local JSON files can only save in one place, there is an issue if multiple plugins try to hook on `acf/settings/save_json`.
+(Any field groups that you edit will be saved to the last plugin that hooks on the filter.) That's the problem ACF Local JSON Manager 
+tries to solve.
+
+With ACF Local JSON Manager you can select which plugin or theme the Local JSON files should be saved to from the comfort of the admin bar.
+
+#### Adding support for ACF Local JSON Manager
+
+You have to add a small filter in order to make your plugins compatible with the ACF Local JSON Manager. The snippet looks like this: 
 
 ```php
+add_filter('aljm_save_json', function($folders) {
+  $folders['My plugin'] = dirname(__FILE__) . '/acf';
+  return $folders;
+});
+```
+
+The hook  `aljm_save_json` provides you with a key/value array `$folders` that lists all the folders currently registered in the manager. 
+The array key is your plugin name and the value is the path to the folder.
+
+**Adding support to an existing plugin or theme**
+
+If your code currently looks like this:
+
+```php
+add_filter('acf/settings/save_json', function() {
+    return dirname(__FILE__) . '/acf';
+});
+```
+
+Simply add the `aljm_save_json` hook underneath it and your code will be compatible with the ACF Local JSON Manager, but it will also
+continue to work as before if the manager is not enabled:
+
+```php
+//Old hook
+add_filter('acf/settings/save_json', function() {
+    return dirname(__FILE__) . '/acf';
+});
+
+//New added hook
 add_filter('aljm_save_json', function($folders) {
   $folders['My plugin'] = dirname(__FILE__) . '/acf';
   return $folders;
