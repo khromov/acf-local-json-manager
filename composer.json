@@ -1,0 +1,7 @@
+{
+  "name"       : "khromov/acf-local-json-manager",
+  "type"       : "wordpress-plugin",
+  "require"    : {
+    "composer/installers": "~1.0"
+  }
+}
