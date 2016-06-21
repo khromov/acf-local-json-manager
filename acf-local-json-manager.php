@@ -2,8 +2,9 @@
 /**
  * Plugin Name: ACF Local JSON Manager
  * Description: Manages plugins that use ACF Local JSON
- * Version: 1.1
+ * Version: 1.2
  * Author: khromov
+ * GitHub Plugin URI: khromov/acf-local-json-manager
  */
 
 /**
